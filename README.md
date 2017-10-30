@@ -69,11 +69,22 @@ My final model consisted of the following layers:
 
 Layer	Description
 Input	32x32x3 RGB image
-Convolution 3x3	1x1 stride, same padding, outputs 32x32x64
-RELU	
-Max pooling	2x2 stride, outputs 16x16x64
-Convolution 3x3	etc.
-Fully connected	etc.
+Input 32x32x1 after gray scaling
+5x5 convolution (32x32x1 in, 28x28x6 out)
+ReLU
+2x2 max pool (28x28x6 in, 14x14x6 out)
+5x5 convolution (14x14x6 in, 10x10x16 out)
+ReLU
+2x2 max pool (10x10x16 in, 5x5x16 out)
+5x5 convolution (5x5x6 in, 1x1x400 out)
+ReLu
+Flatten layers from numbers 8 (1x1x400 -> 400) and 6 (5x5x16 -> 400)
+Concatenate flattened layers to a single size-800 layer
+Dropout layer
+Fully connected layer (800 in, 43 out)
+
+
+
 Softmax	etc.
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
@@ -83,9 +94,9 @@ To train the model, I used an ....
 
 My final model results were:
 
-training set accuracy of ?
-validation set accuracy of ?
-test set accuracy of ?
+training set accuracy of 99.0%
+validation set accuracy of 93.9%
+test set accuracy of 92.7%
 If an iterative approach was chosen:
 
 What was the first architecture that was tried and why was it chosen?
